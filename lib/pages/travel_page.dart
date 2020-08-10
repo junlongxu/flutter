@@ -28,13 +28,15 @@ class _TravelPageState extends State<TravelPage> {
   void initState() {
     super.initState();
     // _controller = VideoPlayerController.network('${widget.url}.mp4')
-    _controller = VideoPlayerController.network('http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020080515/1290895585221619714/mp4/1.mp4')
-    
+    // https://bitcdn-kronehit.bitmovin.com/v2/hls/chunklist_b3128000.m3u8
+    _controller = VideoPlayerController.network('https://bitcdn-kronehit.bitmovin.com/v2/hls/chunklist_b3128000.m3u8')
       ..initialize().then((_) {
         setState(() {
           _controller.play();
           _controller.setLooping(true);
         });
+      }).catchError((e)=>{
+        print('直播-->$e')
       });
   }
 
