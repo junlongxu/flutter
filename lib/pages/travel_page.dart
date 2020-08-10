@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:getflutter/getflutter.dart';
+
 // class TravelPage extends StatefulWidget {
 //   _TravelPageState createState() => _TravelPageState();
 // }
@@ -67,20 +69,20 @@ class _TravelPageState extends State<TravelPage> {
                 ),
               ),
             )
-          : Text('1'),
+          : loadingVideo(),
     );
   }
 
-  // Widget loadingVideo() => Container(
-  //       color: Colors.black,
-  //       child: Center(
-  //         child: GFLoader(
-  //           type: GFLoaderType.circle,
-  //           loaderColorOne: Colors.blueAccent,
-  //           loaderColorTwo: Colors.black,
-  //           loaderColorThree: Colors.pink,
-  //         ),
-  //       ),
-  //     );
+  Widget loadingVideo() => Container(
+        color: Colors.black,
+        child: Center(
+          child: GFLoader(
+            type: GFLoaderType.circle,
+            loaderColorOne: Colors.blueAccent,
+            loaderColorTwo: Colors.black,
+            loaderColorThree: Colors.pink,
+          ),
+        ),
+      );
 }
 
