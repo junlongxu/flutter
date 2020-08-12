@@ -6,7 +6,7 @@ class SearchBar extends StatefulWidget {
   final bool enabeld; // 是否启用
   final bool hideLeft; // 是否隐藏左侧返回按钮
   final SearchBarType searchBarType; // 枚举类型
-  final String hint; // 提示
+  final String hint; // 提示输入框文字
   final String defaultText; // 默认输入框文字
   final void Function() leftButtonClick; // 左侧按钮点击
   final void Function() rightButtonClick; // 右侧点击搜索

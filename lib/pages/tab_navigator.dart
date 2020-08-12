@@ -15,7 +15,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   final Color _defaultColor = Colors.grey;
   final Color _activeColor = Colors.blue;
   final PageController _controller = PageController(
-    initialPage: 1
+    initialPage: 0
   );
 
   @override

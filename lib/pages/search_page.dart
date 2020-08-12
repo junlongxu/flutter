@@ -6,7 +6,7 @@ import 'package:flutter_tourism/widgets/search_bar.dart';
 import 'package:flutter_tourism/widgets/web_view_widget.dart';
 
 const SEARCH_URL =
-    'https://m.ctrip.com/restapi/h5api/globalsearch/search?source=mobileweb&action=mobileweb&keyword=长城';
+    'https://m.ctrip.com/restapi/h5api/globalsearch/search?source=mobileweb&action=mobileweb&keyword=';
 const TYPES = [
   'channelgroup',
   'gs',
@@ -22,6 +22,7 @@ const TYPES = [
   'ticket',
   'travelgroup'
 ];
+
 class SearchPage extends StatefulWidget {
   final bool hideLeft;
   final String searchurl;
@@ -41,6 +42,14 @@ class _SearchPageState extends State<SearchPage> {
   SearchModel searchModel;
   String keyword;
   @override
+  void initState() {
+    if (widget.keyword != null) {
+      _onChanged(widget.keyword);
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
@@ -53,17 +62,17 @@ class _SearchPageState extends State<SearchPage> {
                 flex: 1,
                 child: ListView.builder(
                   itemCount: searchModel?.data?.length ?? 0,
+                  // 会把所有元素进行遍历
                   itemBuilder: (BuildContext context, int index) {
-                    return _item(index);
+                    return _item(searchModel.data[index]);
                   },
                 )))
       ],
     ));
   }
 
-  _item(int index) {
-    if (searchModel == null || searchModel.data == null) return null;
-    SearchItem item = searchModel.data[index];
+  _item(SearchItem item) {
+    if (searchModel == null || searchModel.data == null || item == null) return null;
     return GestureDetector(
         onTap: () {
           NavigatorUtil.push(
@@ -79,10 +88,9 @@ class _SearchPageState extends State<SearchPage> {
               Container(
                 margin: EdgeInsets.all(1),
                 child: Image(
-                  height: 26,
-                  width: 26,
-                  image: AssetImage(_iamge(item.type))
-                ),
+                    height: 26,
+                    width: 26,
+                    image: AssetImage(_iamge(item.type))),
               ),
               Column(
                 children: <Widget>[
@@ -100,30 +108,73 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ));
   }
-  String _iamge(String type){
-    if(type == null) return 'images/type_travelgroup.png';
+
+  // 左侧icon图片
+  String _iamge(String type) {
+    if (type == null) return 'images/type_travelgroup.png';
     String defaultPath = 'travelgroup';
     for (final val in TYPES) {
-      if(type.contains(val)){
+      if (type.contains(val)) {
         defaultPath = val;
         break;
       }
     }
     return 'images/type_$defaultPath.png';
   }
-  _title(SearchItem item){
 
+  // 上半部分文字
+  _title(SearchItem item) {
+    if (item == null) return null;
+    List<TextSpan> spans = [];
+    spans.addAll(_keywordTextSpans(item.word, searchModel.keyword));
+    spans.add(TextSpan(
+        text: ' ${(item.districtname ?? '')}  ${item.zonename ?? ''}',
+        style: TextStyle(fontSize: 16, color: Colors.grey)));
+    return RichText(text: TextSpan(children: spans));
   }
+
   _subTitle(SearchItem item) {
-
+    return RichText(
+      text: TextSpan(children: <TextSpan>[
+        TextSpan(
+            text: item.price ?? '',
+            style: TextStyle(fontSize: 16, color: Colors.orange)),
+        TextSpan(
+            text: '  ${item.star ?? ''}',
+            style: TextStyle(fontSize: 12, color: Colors.grey))
+      ]),
+    );
   }
+
+  // 给keyword设置高亮
+  _keywordTextSpans(String word, String keyword) {
+    List<TextSpan> spans = [];
+    if (word == null || word.length == 0) return spans;
+    List<String> arr = word.split(keyword);
+    TextStyle normalStyle = TextStyle(fontSize: 16, color: Colors.black87);
+    TextStyle keywordStyle = TextStyle(fontSize: 16, color: Colors.orange);
+    int i = 0;
+    while (i < arr.length) {
+      //'wordwoc'.split('w') -> [, ord, oc] @https://www.tutorialspoint.com/tpcg.php?p=wcpcUA
+      if ((i + 1) % 2 == 0) {
+        spans.add(TextSpan(text: keyword, style: normalStyle));
+      }
+      if (arr[i] != null && arr[i].length != 0) {
+        spans.add(TextSpan(text: arr[i], style: keywordStyle));
+      }
+    }
+    return spans;
+  }
+
   _onChanged(String text) {
+    keyword = text;
     if (text.length == 0) {
       setState(() {
         searchModel = null;
       });
       return;
     }
+
     // 拼接地址和输入value
     String url = widget.searchurl + text;
     SearchDao(url, text).then((SearchModel model) {

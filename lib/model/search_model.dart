@@ -1,4 +1,5 @@
 class SearchModel {
+  String keyword;
   final List<SearchItem> data;
 
   SearchModel({this.data});
@@ -9,9 +10,6 @@ class SearchModel {
     return SearchModel(data: data);
   }
 
-  get keyword => null;
-
-  set keyword(String keyword) {}
 }
 
 class SearchItem {
