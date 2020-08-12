@@ -121,8 +121,8 @@ class _SearchPageState extends State<SearchPage> {
     }
     return 'images/type_$defaultPath.png';
   }
-
-  // 上半部分文字
+ 
+  // 上半部分文字3
   _title(SearchItem item) {
     if (item == null) return null;
     List<TextSpan> spans = [];
@@ -162,6 +162,7 @@ class _SearchPageState extends State<SearchPage> {
       if (arr[i] != null && arr[i].length != 0) {
         spans.add(TextSpan(text: arr[i], style: keywordStyle));
       }
+      ++i;
     }
     return spans;
   }
