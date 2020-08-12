@@ -15,7 +15,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   final Color _defaultColor = Colors.grey;
   final Color _activeColor = Colors.blue;
   final PageController _controller = PageController(
-    initialPage: 0
+    initialPage: 1
   );
 
   @override
@@ -26,7 +26,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         physics: NeverScrollableScrollPhysics(), //禁止滑动
         children: <Widget>[
           HomePage(),
-          SearchPage(),
+          SearchPage(hideLeft: true),
           TravelPage(),
           MyPage(),
           H5Page()
