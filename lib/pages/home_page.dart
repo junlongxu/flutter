@@ -17,11 +17,13 @@ import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 const SEARCH_BAR_DEFAULT_TEXT = '网红打卡地 景点 酒店 美食';
+
 class HomePage extends StatefulWidget {
   _HomepageState createState() => _HomepageState();
 }
 
 class _HomepageState extends State<HomePage> {
+  double appBarAlpha = 0;
   List<CommonModel> bannerList = [];
   List<CommonModel> localNavList = [];
   List<CommonModel> subNavList = [];
@@ -31,11 +33,11 @@ class _HomepageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     _handleRefresh();
     Future.delayed(Duration(milliseconds: 600), () {
       FlutterSplashScreen.hide();
     });
-    super.initState();
   }
 
   Future<Null> _handleRefresh() async {
@@ -56,7 +58,6 @@ class _HomepageState extends State<HomePage> {
     return null;
   }
 
-  double appBarAlpha = 0;
   _onScroll(offset) {
     double alpha = offset / APPBAR_SCROLL_OFFSET;
     if (alpha < 0) {
@@ -72,29 +73,30 @@ class _HomepageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xfff2f2f2),
         body: LoadingContainer(
-      isLoading: _loading,
-      child: Stack(
-        children: <Widget>[
-          MediaQuery.removePadding(
-              removeTop: true,
-              context: context,
-              child: RefreshIndicator(
-                onRefresh: _handleRefresh,
-                child: NotificationListener(
-                    // ignore: missing_return
-                    onNotification: (scrollNotification) {
-                      if (scrollNotification is ScrollUpdateNotification &&
-                          scrollNotification.depth == 0) {
-                        _onScroll(scrollNotification.metrics.pixels);
-                      }
-                    },
-                    child: _listView),
-              )),
-          _appBar
-        ],
-      ),
-    ));
+          isLoading: _loading,
+          child: Stack(
+            children: <Widget>[
+              MediaQuery.removePadding(
+                  removeTop: true,
+                  context: context,
+                  child: RefreshIndicator(
+                    onRefresh: _handleRefresh,
+                    child: NotificationListener(
+                        // ignore: missing_return
+                        onNotification: (scrollNotification) {
+                          if (scrollNotification is ScrollUpdateNotification &&
+                              scrollNotification.depth == 0) {
+                            _onScroll(scrollNotification.metrics.pixels);
+                          }
+                        },
+                        child: _listView),
+                  )),
+              _appBar
+            ],
+          ),
+        ));
   }
 
   Widget get _listView {
@@ -115,43 +117,40 @@ class _HomepageState extends State<HomePage> {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0x66000000), Colors.transparent],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter
-            )
-          ),
+              gradient: LinearGradient(
+                  colors: [Color(0x66000000), Colors.transparent],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter)),
           child: Container(
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             height: 80,
             decoration: BoxDecoration(
-              color: Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255)
-            ),
+                color:
+                    Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255)),
             child: SearchBar(
-              searchBarType: appBarAlpha > 0.2 ? SearchBarType.homeLight : SearchBarType.home,
+              searchBarType: appBarAlpha > 0.2
+                  ? SearchBarType.homeLight
+                  : SearchBarType.home,
               inputBoxClick: _jumpToSearch,
               speakClick: _jumpToSpeak,
               defaultText: SEARCH_BAR_DEFAULT_TEXT,
-              leftButtonClick: ()=>{},
+              leftButtonClick: () => {},
             ),
           ),
         ),
         Container(
           height: appBarAlpha > 0.2 ? 0.5 : 0,
           decoration: BoxDecoration(
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]
-          ),
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]),
         )
       ],
     );
   }
-  _jumpToSearch() {
-    NavigatorUtil.push(context, SearchPage(
-      hint: SEARCH_BAR_DEFAULT_TEXT,
-      hideLeft: false
-    ));
-  }
-  _jumpToSpeak() {
 
+  _jumpToSearch() {
+    NavigatorUtil.push(
+        context, SearchPage(hint: SEARCH_BAR_DEFAULT_TEXT, hideLeft: false));
   }
+
+  _jumpToSpeak() {}
 }

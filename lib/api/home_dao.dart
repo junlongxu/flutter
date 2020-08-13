@@ -9,5 +9,5 @@ Future<HomeModel> HomeDao() async {
     method: 'get',
     json: {},
   );
-  return HomeModel.formJson(result);
+  return HomeModel.fromJson(result);
 }

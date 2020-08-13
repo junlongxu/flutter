@@ -11,7 +11,6 @@
   // 9. AlertDialog
 
 import 'package:flutter/material.dart';
-import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 
 class LessGroupPage extends StatelessWidget {
   @override

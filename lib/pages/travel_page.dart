@@ -1,90 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-import 'package:getflutter/getflutter.dart';
-
-// class TravelPage extends StatefulWidget {
-//   _TravelPageState createState() => _TravelPageState();
-// }
-
-// class _TravelPageState extends State<TravelPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Text('TravelPage')
-//     );
-//   }
-// }
+import 'package:flutter_tourism/api/travel_tab_dao.dart';
+import 'package:flutter_tourism/model/travel_tab_mode.dart';
 
 class TravelPage extends StatefulWidget {
-  final String url;
-  const TravelPage({this.url});
   @override
   _TravelPageState createState() => _TravelPageState();
 }
 
-class _TravelPageState extends State<TravelPage> {
-  VideoPlayerController _controller;
+class _TravelPageState extends State<TravelPage>
+    with SingleTickerProviderStateMixin {
+  TabController _controller;
+  List<Tabs> tabs = [];
+  TravelTabModel travelTabModel;
+
   @override
   void initState() {
-    super.initState();
-    // _controller = VideoPlayerController.network('${widget.url}.mp4')
-    // https://bitcdn-kronehit.bitmovin.com/v2/hls/chunklist_b3128000.m3u8
-    _controller = VideoPlayerController.network('https://bitcdn-kronehit.bitmovin.com/v2/hls/chunklist_b3128000.m3u8')
-      ..initialize().then((_) {
-        setState(() {
-          _controller.play();
-          _controller.setLooping(true);
-        });
-      }).catchError((e)=>{
-        print('直播-->$e')
+    // _controller = TabController(length: tabs.length, vsync: this);
+    TravelTabDao().then((TravelTabModel model) {
+      _controller = TabController(length: model.tabs.length, vsync: this); //fix tab label 空白问题
+      setState(() {
+        tabs = model.tabs;
+        travelTabModel = model;
       });
+    }).catchError((e) {
+      print(e);
+    });
+    super.initState();
   }
-
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      color: Colors.black,
-      height: double.infinity,
-      child: _controller.value.initialized
-          ? GestureDetector(
-              onTap: () {
-                print(_controller.value.aspectRatio);
-                if (_controller.value.isPlaying) {
-                  _controller.pause();
-                } else {
-                  _controller.play();
-                }
-              },
-              child: AspectRatio(
-                aspectRatio: 0.66, //_controller.value.aspectRatio,
-                child: VideoPlayer(
-                  _controller,
-                ),
+  Widget build(BuildContext context) => Scaffold(
+        body: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.only(top: 40),
+              child: TabBar(
+                controller: _controller,
+                isScrollable: true, // 可以左右滑动
+                labelColor: Colors.black, // 显示颜色
+                labelPadding: EdgeInsets.fromLTRB(20, 0, 10, 5),
+                indicator: UnderlineTabIndicator(
+                    // 显示文字active
+                    borderSide: BorderSide(color: Color(0xff2fcfbb), width: 3),
+                    insets: EdgeInsets.only(bottom: 4)),
+                tabs: tabs.map<Tab>((tab) => Tab(text: tab.labelName)).toList(),
+              ),
+            ),
+            Flexible(
+              child: TabBarView(
+                controller: _controller,
+                // Text规定返回的类型
+                children: tabs
+                    .map<Text>((tab) => Text(tab.groupChannelCode))
+                    .toList(),
               ),
             )
-          : loadingVideo(),
-    );
-  }
-
-  Widget loadingVideo() => Container(
-        color: Colors.black,
-        child: Center(
-          child: GFLoader(
-            type: GFLoaderType.circle,
-            loaderColorOne: Colors.blueAccent,
-            loaderColorTwo: Colors.black,
-            loaderColorThree: Colors.pink,
-          ),
+          ],
         ),
       );
 }
-

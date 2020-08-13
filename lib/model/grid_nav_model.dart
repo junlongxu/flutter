@@ -5,11 +5,11 @@ class GridNavModel{
   final GridNavItem flight;
   final GridNavItem travel;
   GridNavModel({this.hotel, this.flight, this.travel});
-  factory GridNavModel.formJson(Map<String, dynamic> json){
+  factory GridNavModel.fromJson(Map<String, dynamic> json){
     return GridNavModel(
-      hotel: GridNavItem.formJson(json['hotel']),
-      flight: GridNavItem.formJson(json['flight']),
-      travel: GridNavItem.formJson(json['travel'])
+      hotel: GridNavItem.fromJson(json['hotel']),
+      flight: GridNavItem.fromJson(json['flight']),
+      travel: GridNavItem.fromJson(json['travel'])
     );
   }
 }
@@ -23,15 +23,15 @@ class GridNavItem{
   final CommonModel item3;
   final CommonModel item4;
   GridNavItem({this.startColor, this.endColor, this.mainItem, this.item1, this.item2, this.item3, this.item4});
-  factory GridNavItem.formJson(Map<String, dynamic> json) {
+  factory GridNavItem.fromJson(Map<String, dynamic> json) {
     return GridNavItem(
       startColor: json['startColor'],
       endColor: json['startColor'],
-      mainItem: CommonModel.formJson(json['mainItem']),
-      item1: CommonModel.formJson(json['item1']),
-      item2: CommonModel.formJson(json['item2']),
-      item3: CommonModel.formJson(json['item3']),
-      item4: CommonModel.formJson(json['item4']),
+      mainItem: CommonModel.fromJson(json['mainItem']),
+      item1: CommonModel.fromJson(json['item1']),
+      item2: CommonModel.fromJson(json['item2']),
+      item3: CommonModel.fromJson(json['item3']),
+      item4: CommonModel.fromJson(json['item4']),
     );
   }
 

@@ -151,16 +151,16 @@ class _SearchPageState extends State<SearchPage> {
     List<TextSpan> spans = [];
     if (word == null || word.length == 0) return spans;
     List<String> arr = word.split(keyword);
-    TextStyle normalStyle = TextStyle(fontSize: 16, color: Colors.black87);
     TextStyle keywordStyle = TextStyle(fontSize: 16, color: Colors.orange);
+    TextStyle normalStyle = TextStyle(fontSize: 16, color: Colors.black87);
     int i = 0;
     while (i < arr.length) {
       //'wordwoc'.split('w') -> [, ord, oc] @https://www.tutorialspoint.com/tpcg.php?p=wcpcUA
       if ((i + 1) % 2 == 0) {
-        spans.add(TextSpan(text: keyword, style: normalStyle));
+        spans.add(TextSpan(text: keyword, style: keywordStyle));
       }
       if (arr[i] != null && arr[i].length != 0) {
-        spans.add(TextSpan(text: arr[i], style: keywordStyle));
+        spans.add(TextSpan(text: arr[i], style: normalStyle));
       }
       ++i;
     }

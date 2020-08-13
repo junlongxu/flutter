@@ -11,7 +11,6 @@
   // 9. AlertDialog
 
 import 'package:flutter/material.dart';
-import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 import 'package:flutter_tourism/demo/AnimatedBottomBar.dart';
 import 'package:flutter_tourism/demo/app_lifecycle.dart';
 import 'package:flutter_tourism/demo/flutter_widget_lifecycle.dart';

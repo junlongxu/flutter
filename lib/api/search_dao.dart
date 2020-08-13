@@ -9,7 +9,7 @@ Future<SearchModel> SearchDao(String url, String text) async {
   final response = await http.get(url);
   Utf8Decoder utf8decoder = Utf8Decoder(); // fix 中文乱码
   var result = json.decode(utf8decoder.convert(response.bodyBytes));
-  SearchModel model = SearchModel.formJson(result);
+  SearchModel model = SearchModel.fromJson(result);
   model.keyword = text;
   return model;
 }

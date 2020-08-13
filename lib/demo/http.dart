@@ -17,7 +17,7 @@ class _HttpState extends State<Http> {
     Utf8Decoder utf8decoder = Utf8Decoder(); // 防止乱码
     final result = json.decode(utf8decoder.convert(res.bodyBytes));
     // print('---->$result');
-    return CommonModel.formJson(result);
+    return CommonModel.fromJson(result);
   }
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class CommonModel {
   final bool hideAppBar;
 
   CommonModel({this.icon, this.title, this.url, this.statusBarColor, this.hideAppBar});
-  factory CommonModel.formJson(Map<String, dynamic> json) {
+  factory CommonModel.fromJson(Map<String, dynamic> json) {
     return CommonModel(
       icon: json['icon'],
       title: json['title'],

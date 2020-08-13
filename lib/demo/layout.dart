@@ -9,7 +9,6 @@
 // 8. PageView
 
 import 'package:flutter/material.dart';
-import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 
 class StateFullLayout extends StatefulWidget {
   @override

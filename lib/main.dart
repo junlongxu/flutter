@@ -12,7 +12,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 import 'package:flutter_tourism/pages/tab_navigator.dart';
 
 

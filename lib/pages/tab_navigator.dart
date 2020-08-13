@@ -5,7 +5,7 @@ import 'package:flutter_tourism/pages/my_page.dart';
 import 'package:flutter_tourism/pages/search_page.dart';
 import 'package:flutter_tourism/pages/travel_page.dart';
 
-class TabNavigator extends StatefulWidget{
+class TabNavigator extends StatefulWidget {
   int currentIndex;
   TabNavigator({this.currentIndex = 0});
   _TabNavigatorState createState() => _TabNavigatorState();
@@ -14,9 +14,7 @@ class TabNavigator extends StatefulWidget{
 class _TabNavigatorState extends State<TabNavigator> {
   final Color _defaultColor = Colors.grey;
   final Color _activeColor = Colors.blue;
-  final PageController _controller = PageController(
-    initialPage: 0
-  );
+  final PageController _controller = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -33,70 +31,34 @@ class _TabNavigatorState extends State<TabNavigator> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: widget.currentIndex,
-        onTap: (index) {
-          _controller.jumpToPage(index);
-          setState(() {
-            widget.currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: _defaultColor),
-            activeIcon: Icon(Icons.home, color: _activeColor),
-            title: Text(
-              '首页',
-              style: TextStyle(
-                color: widget.currentIndex != 0 ? _defaultColor : _activeColor
-              ),
-            )
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: _defaultColor),
-            activeIcon: Icon(Icons.search, color: _activeColor),
-            title: Text(
-              '搜索',
-              style: TextStyle(
-                color: widget.currentIndex != 1 ? _defaultColor : _activeColor
-              ),
-            )
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt, color: _defaultColor),
-            activeIcon: Icon(Icons.camera_alt, color: _activeColor),
-            title: Text(
-              '旅拍',
-              style: TextStyle(
-                color: widget.currentIndex != 2 ? _defaultColor : _activeColor
-              ),
-            )
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle, color: _defaultColor),
-            activeIcon: Icon(Icons.account_circle, color: _activeColor),
-            title: Text(
-              '我的',
-              style: TextStyle(
-                color: widget.currentIndex != 3 ? _defaultColor : _activeColor
-              ),
-            )
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle, color: _defaultColor),
-            activeIcon: Icon(Icons.account_circle, color: _activeColor),
-            title: Text(
-              'H5',
-              style: TextStyle(
-                color: widget.currentIndex != 4 ? _defaultColor : _activeColor
-              ),
-            )
-          )
-        ]),
+          currentIndex: widget.currentIndex,
+          onTap: (index) {
+            _controller.jumpToPage(index);
+            setState(() {
+              widget.currentIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          items: [
+            _bottomNavigationBar(context, 0, Icons.home, '首页'),
+            _bottomNavigationBar(context, 1, Icons.search, '搜索'),
+            _bottomNavigationBar(context, 2, Icons.camera_alt, '旅拍'),
+            _bottomNavigationBar(context, 3, Icons.arrow_downward, '我的'),
+            _bottomNavigationBar(context, 4, Icons.account_circle, 'H5'),
+          ]),
     );
   }
 
-  Widget _bottomNavigationBar() {
-    
+  _bottomNavigationBar(
+      BuildContext context, int index, IconData icon, String title) {
+    return BottomNavigationBarItem(
+        icon: Icon(icon, color: _defaultColor),
+        activeIcon: Icon(icon, color: _activeColor),
+        title: Text(
+          title,
+          style: TextStyle(
+              color:
+                  widget.currentIndex != index ? _defaultColor : _activeColor),
+        ));
   }
 }

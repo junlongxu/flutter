@@ -16,7 +16,7 @@ class LoadingContainer extends StatelessWidget {
     // 数据没有返回显示_loadingView, 返回后是flase就展示child
     var lodingOrChild = !isLoading ? child : _loadingView;
     return !cover
-        ? lodingOrChild
+        ? !isLoading ? child : _loadingView
         : Stack(
             children: <Widget>[child, isLoading ? _loadingView : Container()],
           );
