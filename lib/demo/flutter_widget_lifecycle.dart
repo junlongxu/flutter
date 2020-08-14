@@ -5,7 +5,7 @@ class WidgetLifecycle extends StatefulWidget{
   _WidgetLifecycleState createState() => _WidgetLifecycleState();
 }
 
-class _WidgetLifecycleState extends State<WidgetLifecycle> {
+class _WidgetLifecycleState extends State<WidgetLifecycle>  with AutomaticKeepAliveClientMixin {
   int _count = 0;
 
 
@@ -67,4 +67,8 @@ class _WidgetLifecycleState extends State<WidgetLifecycle> {
     print('--dispose常用销毁时调用');
     super.dispose();
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true; //配合with AutomaticKeepAliveClientMixin防止重新渲染
 }

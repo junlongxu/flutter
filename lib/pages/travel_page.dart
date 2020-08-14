@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tourism/api/travel_tab_dao.dart';
 import 'package:flutter_tourism/model/travel_tab_mode.dart';
+import 'package:flutter_tourism/pages/travel_waterfall_page.dart';
 
 class TravelPage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _TravelPageState extends State<TravelPage>
 
   @override
   void initState() {
-    // _controller = TabController(length: tabs.length, vsync: this);
+    _controller = TabController(length: tabs.length, vsync: this);
     TravelTabDao().then((TravelTabModel model) {
       _controller = TabController(length: model.tabs.length, vsync: this); //fix tab label 空白问题
       setState(() {
@@ -30,7 +31,7 @@ class _TravelPageState extends State<TravelPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -54,11 +55,12 @@ class _TravelPageState extends State<TravelPage>
               ),
             ),
             Flexible(
+              flex: 1,
               child: TabBarView(
                 controller: _controller,
                 // Text规定返回的类型
                 children: tabs
-                    .map<Text>((tab) => Text(tab.groupChannelCode))
+                    .map<Widget>((tab) => TravelWaterfallPage(travelUrl: travelTabModel.url,groupChannelCode: tab.groupChannelCode))
                     .toList(),
               ),
             )

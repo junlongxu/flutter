@@ -1,6 +1,6 @@
 class TravelModel {
   int totalCount;
-  List<ResultList> resultList;
+  List<TravelItem> resultList;
 
   TravelModel({ this.totalCount, this.resultList});
 
@@ -8,9 +8,9 @@ class TravelModel {
   
     totalCount = json['totalCount'];
     if (json['resultList'] != null) {
-      resultList = new List<ResultList>();
+      resultList = new List<TravelItem>();
       json['resultList'].forEach((v) {
-        resultList.add(new ResultList.fromJson(v));
+        resultList.add(new TravelItem.fromJson(v));
       });
     }
   }
@@ -43,13 +43,13 @@ class Extension {
   }
 }
 
-class ResultList {
+class TravelItem {
   int type;
   Article article;
 
-  ResultList({this.type, this.article});
+  TravelItem({this.type, this.article});
 
-  ResultList.fromJson(Map<String, dynamic> json) {
+  TravelItem.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     article =
         json['article'] != null ? new Article.fromJson(json['article']) : null;
@@ -283,8 +283,8 @@ class Images {
   int imageId;
   String dynamicUrl;
   String originalUrl;
-  int width;
-  int height;
+  double width;
+  double height;
   int mediaType;
   bool isWaterMarked;
 
