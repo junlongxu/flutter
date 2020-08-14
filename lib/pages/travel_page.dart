@@ -9,14 +9,14 @@ class TravelPage extends StatefulWidget {
 }
 
 class _TravelPageState extends State<TravelPage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   TabController _controller;
   List<Tabs> tabs = [];
   TravelTabModel travelTabModel;
 
   @override
   void initState() {
-    _controller = TabController(length: tabs.length, vsync: this);
+    _controller = TabController(length: 0, vsync: this);
     TravelTabDao().then((TravelTabModel model) {
       _controller = TabController(length: model.tabs.length, vsync: this); //fix tab label 空白问题
       setState(() {

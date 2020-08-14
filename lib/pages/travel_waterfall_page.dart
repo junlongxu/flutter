@@ -19,7 +19,7 @@ class TravelWaterfallPage extends StatefulWidget {
   _TravelWaterfallPageState createState() => _TravelWaterfallPageState();
 }
 
-class _TravelWaterfallPageState extends State<TravelWaterfallPage> {
+class _TravelWaterfallPageState extends State<TravelWaterfallPage> with AutomaticKeepAliveClientMixin {
   List<TravelItem> travelItems;
   int pageIndex = 1;
   bool _loading = true;
@@ -214,4 +214,7 @@ class _TravelWaterfallPageState extends State<TravelWaterfallPage> {
           ],
         ),
       );
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true; // 缓存页面防止重绘
 }
