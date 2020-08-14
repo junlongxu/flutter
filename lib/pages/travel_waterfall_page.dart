@@ -39,6 +39,7 @@ class _TravelWaterfallPageState extends State<TravelWaterfallPage> with Automati
 
   @override
   void dispose() {
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -215,6 +216,5 @@ class _TravelWaterfallPageState extends State<TravelWaterfallPage> with Automati
         ),
       );
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true; // 缓存页面防止重绘
 }
