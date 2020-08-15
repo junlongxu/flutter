@@ -43,12 +43,14 @@ class _HomepageState extends State<HomePage> {
   Future<Null> _handleRefresh() async {
     try {
       HomeModel model = await HomeDao();
-      bannerList = model.bannerList;
-      localNavList = model.localNavList;
-      subNavList = model.subNavList;
-      gridNavModel = model.gridNav;
-      salesBoxModel = model.salesBox;
-      _loading = false;
+      setState(() {
+        bannerList = model.bannerList;
+        localNavList = model.localNavList;
+        subNavList = model.subNavList;
+        gridNavModel = model.gridNav;
+        salesBoxModel = model.salesBox;
+        _loading = false;
+      });
     } catch (e) {
       setState(() {
         _loading = false;
