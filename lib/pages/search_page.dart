@@ -72,7 +72,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   _item(SearchItem item) {
-    if (searchModel == null || searchModel.data == null || item == null) return null;
+    if (searchModel == null || searchModel.data == null || item == null)
+      return null;
     return GestureDetector(
         onTap: () {
           NavigatorUtil.push(
@@ -121,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
     }
     return 'images/type_$defaultPath.png';
   }
- 
+
   // 上半部分文字3
   _title(SearchItem item) {
     if (item == null) return null;
@@ -193,28 +194,26 @@ class _SearchPageState extends State<SearchPage> {
     return Column(
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Color(0x66000000), Colors.transparent],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter)),
-          child: Container(
-              padding: EdgeInsets.only(top: 20),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Color(0x66000000), Colors.transparent],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter)),
+            child: Container(
+              padding: EdgeInsets.only(top: 35),
               height: 80,
               decoration: BoxDecoration(color: Colors.white),
-              child: SafeArea(
-                child: SearchBar(
-                  searchBarType: SearchBarType.normal,
-                  hideLeft: widget?.hideLeft,
-                  defaultText: widget.keyword,
-                  hint: '123',
-                  leftButtonClick: () {
-                    Navigator.pop(context);
-                  },
-                  onChanged: _onChanged,
-                ),
-              )),
-        )
+              child: SearchBar(
+                searchBarType: SearchBarType.normal,
+                hideLeft: widget?.hideLeft,
+                defaultText: widget.keyword,
+                hint: '123',
+                leftButtonClick: () {
+                  Navigator.pop(context);
+                },
+                onChanged: _onChanged,
+              ),
+            ))
       ],
     );
   }

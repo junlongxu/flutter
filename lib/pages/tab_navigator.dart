@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tourism/pages/h5_page.dart';
 import 'package:flutter_tourism/pages/home_page.dart';
+import 'package:flutter_tourism/pages/loop_time.dart';
 import 'package:flutter_tourism/pages/my_page.dart';
 import 'package:flutter_tourism/pages/search_page.dart';
 import 'package:flutter_tourism/pages/travel_page.dart';
@@ -27,7 +28,8 @@ class _TabNavigatorState extends State<TabNavigator> {
           SearchPage(hideLeft: true),
           TravelPage(),
           MyPage(),
-          H5Page()
+          H5Page(),
+          LoopTime()
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -45,6 +47,7 @@ class _TabNavigatorState extends State<TabNavigator> {
             _bottomNavigationBar(context, 2, Icons.camera_alt, '旅拍'),
             _bottomNavigationBar(context, 3, Icons.arrow_downward, '我的'),
             _bottomNavigationBar(context, 4, Icons.account_circle, 'H5'),
+            _bottomNavigationBar(context, 5, Icons.account_circle, '倒计时'),
           ]),
     );
   }

@@ -5,13 +5,16 @@ class H5Page extends StatefulWidget {
   _H5PagePageState createState() => _H5PagePageState();
 }
 
-class _H5PagePageState extends State<H5Page> {
+class _H5PagePageState extends State<H5Page> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -24,4 +27,7 @@ class _H5PagePageState extends State<H5Page> {
           bottomAppBar: true),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

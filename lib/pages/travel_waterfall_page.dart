@@ -189,7 +189,7 @@ class _TravelWaterfallPageState extends State<TravelWaterfallPage> with Automati
                 ),
                 Container(
                   padding: EdgeInsets.all(5),
-                  width: 90,
+                  width: 80,
                   child: Text(
                     item.article.author?.nickName,
                     maxLines: 1,

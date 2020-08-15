@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
   _HomepageState createState() => _HomepageState();
 }
 
-class _HomepageState extends State<HomePage> {
+class _HomepageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   double appBarAlpha = 0;
   List<CommonModel> bannerList = [];
   List<CommonModel> localNavList = [];
@@ -155,4 +155,7 @@ class _HomepageState extends State<HomePage> {
   }
 
   _jumpToSpeak() {}
+
+  @override
+  bool get wantKeepAlive => true;
 }
