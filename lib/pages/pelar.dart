@@ -2,18 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:getflutter/getflutter.dart';
 
-// class TravelPage extends StatefulWidget {
-//   _TravelPageState createState() => _TravelPageState();
-// }
-
-// class _TravelPageState extends State<TravelPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Text('TravelPage')
-//     );
-//   }
-// }
 
 class TravelPage extends StatefulWidget {
   final String url;
