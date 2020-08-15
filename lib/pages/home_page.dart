@@ -13,7 +13,6 @@ import 'package:flutter_tourism/widgets/search_bar.dart';
 import 'package:flutter_tourism/widgets/sub_navList_widget.dart';
 import 'package:flutter_tourism/widgets/swiper_widget.dart';
 import 'package:flutter_tourism/widgets/sales_box.dart';
-import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 const SEARCH_BAR_DEFAULT_TEXT = '网红打卡地 景点 酒店 美食';
@@ -35,9 +34,6 @@ class _HomepageState extends State<HomePage> {
   void initState() {
     super.initState();
     _handleRefresh();
-    Future.delayed(Duration(milliseconds: 600), () {
-      FlutterSplashScreen.hide();
-    });
   }
 
   Future<Null> _handleRefresh() async {
@@ -104,11 +100,15 @@ class _HomepageState extends State<HomePage> {
   Widget get _listView {
     return ListView(
       children: <Widget>[
+        // 轮播图
         SwiperWidget(bannerList: bannerList),
-        LocalNavWidget(localNavList: localNavList),
+
+        LocalNavWidget(localNavList: localNavList), 
+        // 复杂表格
         GridNavWidget(gridNavModel: gridNavModel),
         // 活动入口
         SubNavWidget(subNavList: subNavList),
+        // 底部热门活动
         SalesBox(salesBoxModel: salesBoxModel),
       ],
     );
