@@ -60,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
             context: context,
             child: Expanded(
                 flex: 1,
-                child: ListView.builder(
+                child: ListView.builder( // 只会展示当前屏幕内的数据
                   itemCount: searchModel?.data?.length ?? 0,
                   // 会把所有元素进行遍历
                   itemBuilder: (BuildContext context, int index) {

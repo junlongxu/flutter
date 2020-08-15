@@ -42,26 +42,24 @@ class _TabNavigatorState extends State<TabNavigator> {
           },
           type: BottomNavigationBarType.fixed,
           items: [
-            _bottomNavigationBar(context, 0, Icons.home, '首页'),
-            _bottomNavigationBar(context, 1, Icons.search, '搜索'),
-            _bottomNavigationBar(context, 2, Icons.camera_alt, '旅拍'),
-            _bottomNavigationBar(context, 3, Icons.arrow_downward, '我的'),
-            _bottomNavigationBar(context, 4, Icons.account_circle, 'H5'),
-            _bottomNavigationBar(context, 5, Icons.account_circle, '倒计时'),
+            _bottomNavigationBar(0, Icons.home, '首页'),
+            _bottomNavigationBar(1, Icons.search, '搜索'),
+            _bottomNavigationBar(2, Icons.camera_alt, '旅拍'),
+            _bottomNavigationBar(3, Icons.arrow_downward, '我的'),
+            _bottomNavigationBar(4, Icons.account_circle, 'H5'),
+            _bottomNavigationBar(5, Icons.account_circle, '倒计时'),
           ]),
     );
   }
 
-  _bottomNavigationBar(
-      BuildContext context, int index, IconData icon, String title) {
+  _bottomNavigationBar(int index, IconData icon, String title) {
     return BottomNavigationBarItem(
         icon: Icon(icon, color: _defaultColor),
         activeIcon: Icon(icon, color: _activeColor),
-        title: Text(
-          title,
-          style: TextStyle(
-              color:
-                  widget.currentIndex != index ? _defaultColor : _activeColor),
-        ));
+        title: Text(title,
+            style: TextStyle(
+                color: widget.currentIndex != index
+                    ? _defaultColor
+                    : _activeColor)));
   }
 }

@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter App',
+        title: 'Flutter 之旅',
         theme: ThemeData(primarySwatch: Colors.red),
         home: Container(
           decoration: BoxDecoration(color: Colors.white),
